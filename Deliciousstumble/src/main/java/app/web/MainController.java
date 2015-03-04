@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.service.DaoService;
+import app.service.DeliciousService;
 import domain.DeliciousResponse;
 import domain.Post;
 
@@ -30,8 +32,13 @@ public class MainController {
 	private static final String AUTHORIZATHION_LOCATION = "https://delicious.com/auth/authorize";
 	private static final String CLIENT_SECRET = "4b9c3d1edc298a1600a031b786019744";
 	private static final String CLIENT_ID = "5706addbcf9d8726072f4672e875c46e";
+	
 	@Autowired
-	private app.service.DeliciousService deliciousServis;
+	private DeliciousService deliciousServis;
+	
+	@Autowired
+	private DaoService daoService;
+	
 
 	@RequestMapping("/")
 	public void index(HttpServletRequest servletRequest,
@@ -82,7 +89,7 @@ public class MainController {
 					OAuthResourceResponse.class);
 			
 			List<Post> postsList = deliciousServis.createList(resourceResponse.getBody());
-			
+			daoService.createPosts(postsList);
 
 			return "/delicious";
 		} catch (OAuthProblemException | OAuthSystemException e) {

@@ -16,6 +16,7 @@ import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,12 +27,27 @@ import domain.Post;
 
 @RestController
 public class MainController {
+	
+	@Value("${connection.localhost}")
+	private String localhost;
+	
+	@Value("${connection.request_token_url}")
+	private String request_token_url;
 
-	private static final String API_LOCATION = "https://api.delicious.com/v1/posts/all";
-	private static final String TOKEN_LOCATION = "https://avosapi.delicious.com/api/v1/oauth/token";
-	private static final String AUTHORIZATHION_LOCATION = "https://delicious.com/auth/authorize";
-	private static final String CLIENT_SECRET = "4b9c3d1edc298a1600a031b786019744";
-	private static final String CLIENT_ID = "5706addbcf9d8726072f4672e875c46e";
+	@Value("${connection.api_location}")
+	private String api_location;
+	
+	@Value("${connection.token_location}")
+	private String token_location;
+	
+	@Value("${connection.authorizathion_location}")
+	private String authorizathion_location;
+	
+	@Value("${connection.client_secret}")
+	private String client_secret;
+	
+	@Value("${connection.client_id}")
+	private String client_id;
 	
 	@Autowired
 	private DeliciousService deliciousServis;
@@ -45,9 +61,9 @@ public class MainController {
 			HttpServletResponse servletResponse) {
 		try {
 			OAuthClientRequest request = OAuthClientRequest
-					.authorizationLocation(AUTHORIZATHION_LOCATION)
-					.setClientId(CLIENT_ID)
-					.setRedirectURI("http://localhost:8080/requesttoken")
+					.authorizationLocation(authorizathion_location)
+					.setClientId(client_id)
+					.setRedirectURI(request_token_url)
 					.buildQueryMessage();
 
 			servletResponse.sendRedirect(request.getLocationUri());
@@ -66,9 +82,9 @@ public class MainController {
 			String code = oar.getCode();
 
 			OAuthClientRequest tokenrequest = OAuthClientRequest
-					.tokenLocation(TOKEN_LOCATION).setClientId(CLIENT_ID)
-					.setClientSecret(CLIENT_SECRET)
-					.setRedirectURI("http://localhost:8080/delicious")
+					.tokenLocation(token_location).setClientId(client_id)
+					.setClientSecret(client_secret)
+					.setRedirectURI(localhost)
 					.setCode(code).setParameter("grant_type", "code")
 					.buildQueryMessage();
 
@@ -78,7 +94,7 @@ public class MainController {
 					DeliciousResponse.class);
 
 			OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest(
-					API_LOCATION).buildQueryMessage();
+					api_location).buildQueryMessage();
 			bearerClientRequest.setHeader(OAuth.HeaderType.CONTENT_TYPE,
 					"multipart/form-data");
 			bearerClientRequest.setHeader("Authorization",

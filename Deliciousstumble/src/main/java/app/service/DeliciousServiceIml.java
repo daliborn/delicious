@@ -13,6 +13,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,12 @@ import domain.Posts;
 @Service
 @Qualifier("deliciousService")
 public class DeliciousServiceIml implements DeliciousService {
+	static final Logger logger = Logger.getLogger(DeliciousServiceIml.class.getName());
 
 	@Override
 	public List<Post> createList(String body) {
 		Writer writer = null;
-
+		logger.info("start of writing!");
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream("delicious.xml"), "utf-8"));

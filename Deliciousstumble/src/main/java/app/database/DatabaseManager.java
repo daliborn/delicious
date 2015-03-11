@@ -49,11 +49,14 @@ public class DatabaseManager {
 		final int batchSize = 1000;
 		int count = 0;
 		 
-		for (Post post: postsList) {		 
-		    ps.setString(1, post.getDescription());
-		    ps.setString(2, post.getExtended());
-		    ps.setString(3, post.getHash());
-		    ps.setString(4, post.getHref());
+		for (Post post: postsList) {
+			ps.setString(1, post.getHref());
+		    ps.setString(2, post.getDescription());
+		    ps.setString(3, post.getExtended());
+		    ps.setString(4, post.getHash());
+		    ps.setString(5, post.getMeta());
+		    //ps.setInt(6, post.getOthers());
+		    
 		    ps.addBatch();
 		     
 		    if(++count % batchSize == 0) {

@@ -21,6 +21,10 @@ public class Post {
 	private String tag;
 
 	private String time;
+	
+	private String meta;
+	
+	private Integer others;
 
 	public String getDescription() {
 		return description;
@@ -85,6 +89,22 @@ public class Post {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getMeta() {
+		return meta;
+	}
+
+	public void setMeta(String meta) {
+		this.meta = meta;
+	}
+
+	public Integer getOthers() {
+		return others;
+	}
+
+	public void setOthers(Integer others) {
+		this.others = others;
 	}
 
 }

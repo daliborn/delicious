@@ -23,7 +23,7 @@ import domain.Posts;
 @Service
 @Qualifier("deliciousService")
 public class DeliciousServiceIml implements DeliciousService {
-	static final Logger logger = Logger.getLogger(DeliciousServiceIml.class.getName());
+	private static final Logger logger = Logger.getLogger(DeliciousServiceIml.class.getName());
 
 	@Override
 	public List<Post> createList(String body) {

@@ -1,12 +1,8 @@
 package app.service;
 
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.StringReader;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -27,27 +23,13 @@ public class DeliciousServiceIml implements DeliciousService {
 
 	@Override
 	public List<Post> createList(String body) {
-		Writer writer = null;
 		logger.info("start of writing!");
-		try {
-			writer = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream("delicious.xml"), "utf-8"));
-			writer.write(body);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				writer.close();
-			} catch (Exception ex) {
-			}
-		}
-
 		try {
 			JAXBContext context = JAXBContext.newInstance(Posts.class);
 			Unmarshaller um = context.createUnmarshaller();
-			Posts posts = (Posts) um.unmarshal(new FileReader("delicious.xml"));
+			Posts posts = (Posts) um.unmarshal(new StringReader(body));
 			return posts.getPost();
-		} catch (JAXBException | FileNotFoundException e) {
+		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 		return null;

@@ -29,7 +29,8 @@ public class Post {
 	public String getDescription() {
 		return description;
 	}
-
+	
+	@XmlAttribute( name = "description")
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -37,7 +38,8 @@ public class Post {
 	public String getExtended() {
 		return extended;
 	}
-
+	
+	@XmlAttribute( name = "extended")
 	public void setExtended(String extended) {
 		this.extended = extended;
 	}
@@ -46,6 +48,7 @@ public class Post {
 		return hash;
 	}
 
+	@XmlAttribute( name = "hash")
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
@@ -62,7 +65,8 @@ public class Post {
 	public String getPrivatea() {
 		return privatea;
 	}
-
+	
+	@XmlAttribute( name = "private")
 	public void setPrivatea(String privatea) {
 		this.privatea = privatea;
 	}
@@ -70,7 +74,8 @@ public class Post {
 	public String getShared() {
 		return shared;
 	}
-
+	
+	@XmlAttribute( name = "shared")
 	public void setShared(String shared) {
 		this.shared = shared;
 	}
@@ -78,7 +83,8 @@ public class Post {
 	public String getTag() {
 		return tag;
 	}
-
+	
+	@XmlAttribute( name = "tag")
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
@@ -86,7 +92,8 @@ public class Post {
 	public String getTime() {
 		return time;
 	}
-
+	
+	@XmlAttribute( name = "time")
 	public void setTime(String time) {
 		this.time = time;
 	}
@@ -94,7 +101,8 @@ public class Post {
 	public String getMeta() {
 		return meta;
 	}
-
+	
+	@XmlAttribute( name = "meta")
 	public void setMeta(String meta) {
 		this.meta = meta;
 	}
@@ -103,6 +111,7 @@ public class Post {
 		return others;
 	}
 
+	@XmlAttribute( name = "others")
 	public void setOthers(Integer others) {
 		this.others = others;
 	}

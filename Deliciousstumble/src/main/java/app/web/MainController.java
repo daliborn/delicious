@@ -55,8 +55,7 @@ public class MainController {
 	@Autowired
 	private DaoService daoService;
 	
-
-	@RequestMapping("/")
+	@RequestMapping("/synchronize")
 	public void index(HttpServletRequest servletRequest,
 			HttpServletResponse servletResponse) {
 		try {
@@ -115,9 +114,4 @@ public class MainController {
 
 	}
 
-	@RequestMapping("/delicious")
-	public String delicious(HttpServletRequest request,
-			HttpServletResponse servletResponse) {
-		return "bravo";
-	}
 }

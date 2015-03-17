@@ -73,8 +73,7 @@ public class DatabaseManager {
 		    ps.setString(2, post.getDescription());
 		    ps.setString(3, post.getExtended());
 		    ps.setString(4, post.getHash());
-		    ps.setString(5, post.getMeta());
-		    //ps.setInt(6, post.getOthers());
+		    ps.setTimestamp(5, post.getTime());
 		    
 		    ps.addBatch();
 		     

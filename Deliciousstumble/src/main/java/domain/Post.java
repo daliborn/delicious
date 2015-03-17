@@ -1,10 +1,15 @@
 package domain;
 
+import java.sql.Timestamp;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "post")
 public class Post {
+	
+	private Integer id;
 
 	private String description;
 
@@ -20,7 +25,7 @@ public class Post {
 
 	private String tag;
 
-	private String time;
+	private Timestamp time;
 	
 	private String meta;
 	
@@ -89,12 +94,13 @@ public class Post {
 		this.tag = tag;
 	}
 
-	public String getTime() {
+	public Timestamp getTime() {
 		return time;
 	}
 	
 	@XmlAttribute( name = "time")
-	public void setTime(String time) {
+	@XmlJavaTypeAdapter(DateAdapter.class)
+	public void setTime(Timestamp time) {
 		this.time = time;
 	}
 
@@ -114,6 +120,14 @@ public class Post {
 	@XmlAttribute( name = "others")
 	public void setOthers(Integer others) {
 		this.others = others;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

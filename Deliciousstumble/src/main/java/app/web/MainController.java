@@ -1,7 +1,9 @@
 package app.web;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import app.service.DaoService;
 import app.service.DeliciousService;
+import app.service.UrlChecker;
+import app.service.WebService;
 import domain.DeliciousResponse;
 import domain.Post;
 
@@ -55,8 +59,13 @@ public class MainController {
 	@Autowired
 	private DaoService daoService;
 	
+	@Autowired
+	private WebService webService;
+
+
+	
 	@RequestMapping("/synchronize")
-	public void index(HttpServletRequest servletRequest,
+	public void synchronize(HttpServletRequest servletRequest,
 			HttpServletResponse servletResponse) {
 		try {
 			OAuthClientRequest request = OAuthClientRequest
@@ -73,7 +82,7 @@ public class MainController {
 	}
 
 	@RequestMapping("/requesttoken")
-	public String requesttoken(HttpServletRequest request,
+	public void requesttoken(HttpServletRequest request,
 			HttpServletResponse servletResponse) {
 		OAuthAuthzResponse oar;
 		try {
@@ -105,13 +114,15 @@ public class MainController {
 			
 			List<Post> postsList = deliciousServis.createList(resourceResponse.getBody());
 			daoService.createPosts(postsList);
-
-			return "/delicious";
 		} catch (OAuthProblemException | OAuthSystemException e) {
 			e.printStackTrace();
 		}
-		return "greska";
-
+	}
+	
+	@RequestMapping("check")
+	public void check () {
+		List<Post> posts = daoService.getAllPosts();
+		webService.checkUrl(posts);
 	}
 
 }

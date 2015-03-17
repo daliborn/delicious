@@ -1,6 +1,8 @@
 package app.service;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -17,7 +19,7 @@ public class DaoServiceImpl implements DaoService {
 	
 	@Override
 	public void createPosts(List<Post> postsList) {
-		String sql = "insert into posts (href, description, extended, hash, meta) values (?, ?, ?, ?, ?)";
+		String sql = "insert into posts (href, description, extended, hash, time) values (?, ?, ?, ?, ?)";
 				
 		try {
 			DatabaseManager.executeBatchUpdate(sql,postsList);
@@ -25,10 +27,42 @@ public class DaoServiceImpl implements DaoService {
 			logger.error(e.getMessage());
 			e.printStackTrace();
 			SQLException exe = e.getNextException();
-			
-			logger.error(exe.getMessage());
+			if (exe !=null)	logger.error(exe.getMessage());
 		}
 
+	}
+
+	@Override
+	public List<Post> getAllPosts() {
+		String query = "SELECT * FROM posts";
+		List<Post> list = new ArrayList<>();
+		try {
+			ResultSet resultSet = DatabaseManager.createResultSet(query);
+			
+			while(resultSet.next()) {
+				Post post = new Post();
+				post.setHref(resultSet.getString("href"));
+				post.setDescription(resultSet.getString("description"));
+				post.setHash(resultSet.getString("hash"));
+				post.setId(resultSet.getInt("posts_id"));
+				list.add(post);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public void updatePost(Post post) {
+		String sql = "update Where ";
+		try {
+			int status  = DatabaseManager.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

@@ -17,7 +17,7 @@ import domain.Post;
 
 public class DatabaseManager {
 	private static final Logger logger = Logger.getLogger(DatabaseManager.class.getName());
-	private static final String sql = "insert into posts (href, description, extended, hash, time) values (?, ?, ?, ?, ?)";;
+	private static final String sql = "insert into posts (href, description, extended, hash, time) values (?, ?, ?, ?, ?)";
 
 	
 	private DatabaseManager() {}

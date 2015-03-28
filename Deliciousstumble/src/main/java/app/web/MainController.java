@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.service.DaoService;
+import app.service.PostsService;
 import app.service.DeliciousService;
 import app.service.UrlChecker;
 import app.service.WebService;
@@ -57,7 +57,7 @@ public class MainController {
 	private DeliciousService deliciousServis;
 	
 	@Autowired
-	private DaoService daoService;
+	private PostsService postsService;
 	
 	@Autowired
 	private WebService webService;
@@ -113,7 +113,7 @@ public class MainController {
 					OAuthResourceResponse.class);
 			
 			List<Post> postsList = deliciousServis.createList(resourceResponse.getBody());
-			daoService.createPosts(postsList);
+			postsService.createPosts(postsList);
 		} catch (OAuthProblemException | OAuthSystemException e) {
 			e.printStackTrace();
 		}
@@ -121,7 +121,7 @@ public class MainController {
 	
 	@RequestMapping("check")
 	public void check () {
-		List<Post> posts = daoService.getAllPosts();
+		List<Post> posts = postsService.getAllPosts();
 		webService.checkUrl(posts);
 	}
 

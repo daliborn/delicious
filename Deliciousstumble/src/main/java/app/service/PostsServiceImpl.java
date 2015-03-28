@@ -13,9 +13,9 @@ import app.database.DatabaseManager;
 import domain.Post;
 
 @Service
-@Qualifier("daoService")
-public class DaoServiceImpl implements DaoService {
-	private static final Logger logger = Logger.getLogger(DaoServiceImpl.class.getName());
+@Qualifier("postsService")
+public class PostsServiceImpl implements PostsService {
+	private static final Logger logger = Logger.getLogger(PostsServiceImpl.class.getName());
 	
 	@Override
 	public void createPosts(List<Post> postsList) {

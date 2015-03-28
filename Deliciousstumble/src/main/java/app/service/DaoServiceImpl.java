@@ -19,10 +19,8 @@ public class DaoServiceImpl implements DaoService {
 	
 	@Override
 	public void createPosts(List<Post> postsList) {
-		String sql = "insert into posts (href, description, extended, hash, time) values (?, ?, ?, ?, ?)";
-				
 		try {
-			DatabaseManager.executeBatchUpdate(sql,postsList);
+			DatabaseManager.executeBatchUpdate(postsList);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			e.printStackTrace();

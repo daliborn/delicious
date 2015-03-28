@@ -17,6 +17,7 @@ import domain.Post;
 
 public class DatabaseManager {
 	private static final Logger logger = Logger.getLogger(DatabaseManager.class.getName());
+	private static final String sql = "insert into posts (href, description, extended, hash, time) values (?, ?, ?, ?, ?)";;
 
 	
 	private DatabaseManager() {}
@@ -62,7 +63,7 @@ public class DatabaseManager {
 		return statement.executeUpdate(sql);		
 	}
 	
-	public static int executeBatchUpdate(String sql, List<Post> postsList) throws SQLException {
+	public static int executeBatchUpdate(List<Post> postsList) throws SQLException {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		 
 		final int batchSize = 1000;

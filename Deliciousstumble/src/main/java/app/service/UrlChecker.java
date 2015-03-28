@@ -29,7 +29,7 @@ public class UrlChecker implements Runnable {
 			int code = connection.getResponseCode();
 			
 			
-			//Status table?, update existing
+			//Status table?, update existing, response code, date
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

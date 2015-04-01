@@ -122,7 +122,7 @@ public class MainController {
 	@RequestMapping("check")
 	public void check () {
 		List<Post> posts = postsService.getAllPosts();
-		webService.checkUrl(posts);
+		webService.checkUrlBatch(posts);
 	}
 
 }

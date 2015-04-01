@@ -10,6 +10,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import domain.CheckStatus;
 import domain.Post;
 
 @Service
@@ -39,7 +40,7 @@ public class WebServiceImpl implements WebService {
 	}
 
 	@Override
-	public void checkUrl(List<Post> posts) {
+	public void checkUrlBatch(List<Post> posts) {
 		ArrayBlockingQueue<Post> queue = new ArrayBlockingQueue<Post>(100, false, posts);
 		
 		for (int i = 0; i < webWorkers; i++) {
@@ -47,6 +48,12 @@ public class WebServiceImpl implements WebService {
 			urlCheck.run();
 					
 		}	
+	}
+
+	@Override
+	public CheckStatus checkUrl(Post post) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

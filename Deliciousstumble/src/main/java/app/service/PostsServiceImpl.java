@@ -63,4 +63,10 @@ public class PostsServiceImpl implements PostsService {
 		
 	}
 
+	@Override
+	public Post getPostById(Integer postId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

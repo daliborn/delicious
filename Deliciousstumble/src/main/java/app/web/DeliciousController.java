@@ -113,4 +113,10 @@ public class DeliciousController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping("deletePost/{postId}/")
+	public void deletePost(Long postId){
+		//delete in DB
+		//delete on delicious
+	}
 }

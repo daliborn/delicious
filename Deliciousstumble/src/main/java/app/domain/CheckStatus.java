@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 public class CheckStatus implements Serializable {
 	
@@ -33,11 +35,12 @@ public class CheckStatus implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	@Column
 	private String errorCode;
 	
 	@Column
+	@JsonView(View.Summary.class)
 	private Integer statusCode;
 	@Column
 	private Timestamp dateRun;
@@ -45,10 +48,10 @@ public class CheckStatus implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
     public Post post;
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Integer getStatusCode() {
@@ -74,7 +77,8 @@ public class CheckStatus implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("CheckStatus [id=%s, statusCode=%s, dateRun=%s]",
-				id, statusCode, dateRun);
+		return String
+				.format("CheckStatus [id=%s, errorCode=%s, statusCode=%s, dateRun=%s, post=%s]",
+						id, errorCode, statusCode, dateRun, post);
 	}
 }

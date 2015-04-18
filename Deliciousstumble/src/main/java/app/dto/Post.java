@@ -3,12 +3,9 @@ package app.dto;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import app.dto.DateAdapter;
 
 
 @XmlRootElement(name = "post")

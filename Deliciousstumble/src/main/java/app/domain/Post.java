@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import app.dto.DateAdapter;
 
 
@@ -45,7 +47,7 @@ public class Post implements Serializable{
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	
 	@Column
 	private String description;
@@ -54,6 +56,7 @@ public class Post implements Serializable{
 	@Column
 	private String hash;
 	@Column( length = 10000 )
+	@JsonView(View.Summary.class)
 	private String href;
 	@Column
 	private String privatea;
@@ -75,7 +78,7 @@ public class Post implements Serializable{
 		return description;
 	}
 	
-	@XmlAttribute( name = "description")
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -84,7 +87,7 @@ public class Post implements Serializable{
 		return extended;
 	}
 	
-	@XmlAttribute( name = "extended")
+
 	public void setExtended(String extended) {
 		this.extended = extended;
 	}
@@ -93,7 +96,7 @@ public class Post implements Serializable{
 		return hash;
 	}
 
-	@XmlAttribute( name = "hash")
+
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
@@ -102,7 +105,7 @@ public class Post implements Serializable{
 		return href;
 	}
 	
-	@XmlAttribute( name = "href")
+
 	public void setHref(String href) {
 		this.href = href;
 	}
@@ -111,7 +114,7 @@ public class Post implements Serializable{
 		return privatea;
 	}
 	
-	@XmlAttribute( name = "private")
+
 	public void setPrivatea(String privatea) {
 		this.privatea = privatea;
 	}
@@ -120,7 +123,7 @@ public class Post implements Serializable{
 		return shared;
 	}
 	
-	@XmlAttribute( name = "shared")
+
 	public void setShared(String shared) {
 		this.shared = shared;
 	}
@@ -129,7 +132,7 @@ public class Post implements Serializable{
 		return tag;
 	}
 	
-	@XmlAttribute( name = "tag")
+
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
@@ -138,8 +141,6 @@ public class Post implements Serializable{
 		return time;
 	}
 	
-	@XmlAttribute( name = "time")
-	@XmlJavaTypeAdapter(DateAdapter.class)
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
@@ -148,7 +149,6 @@ public class Post implements Serializable{
 		return meta;
 	}
 	
-	@XmlAttribute( name = "meta")
 	public void setMeta(String meta) {
 		this.meta = meta;
 	}
@@ -157,33 +157,34 @@ public class Post implements Serializable{
 		return others;
 	}
 
-	@XmlAttribute( name = "others")
+
 	public void setOthers(Integer others) {
 		this.others = others;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return String
-				.format("Post [id=%s, description=%s, extended=%s, hash=%s, href=%s, privatea=%s, shared=%s, tag=%s, time=%s, meta=%s, others=%s]",
-						id, description, extended, hash, href, privatea,
-						shared, tag, time, meta, others);
 	}
 
 	public List<CheckStatus> getCheckStatus() {
 		return checkStatus;
 	}
-
+	
 	public void setCheckStatus(List<CheckStatus> checkStatus) {
 		this.checkStatus = checkStatus;
 	}
+
+	@Override
+	public String toString() {
+		return String
+				.format("Post [id=%s, description=%s, extended=%s, hash=%s, href=%s, privatea=%s, shared=%s, tag=%s, time=%s, meta=%s, others=%s, checkStatus=%s]",
+						id, description, extended, hash, href, privatea,
+						shared, tag, time, meta, others, checkStatus);
+	}
+
 
 }

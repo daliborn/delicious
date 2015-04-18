@@ -12,6 +12,7 @@ import app.domain.CheckStatus;
 import app.domain.Post;
 import app.service.CheckStatusService;
 import app.service.PostsService;
+import app.service.util.AppHttpStatus;
 
 
 @RestController
@@ -31,7 +32,7 @@ public class CheckStatusController {
 	
 	@RequestMapping(value = "post/all/createCheckStatus", method = RequestMethod.POST)
 	public void checkStatuses () {
-		List<Post> posts = postsService.getAllPosts();
+		List<Post> posts = postsService.fetchPosts(AppHttpStatus.ALL);
 		checkStatusService.createCheckUrlBatch(posts );		
 	}
 

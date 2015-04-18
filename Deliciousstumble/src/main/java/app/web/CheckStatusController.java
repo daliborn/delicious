@@ -12,7 +12,6 @@ import app.domain.CheckStatus;
 import app.domain.Post;
 import app.service.CheckStatusService;
 import app.service.PostsService;
-import app.service.WebService;
 
 
 @RestController
@@ -21,23 +20,19 @@ public class CheckStatusController {
 	private CheckStatusService checkStatusService;
 	
 	@Autowired
-	private PostsService postsService;
-	
-	@Autowired 
-	private WebService webService;
-	
+	private PostsService postsService;	
 	
 	@RequestMapping(value = "post/{postId}/createCheckStatus", method = RequestMethod.POST)
-	public void createCheckStatus (@PathVariable Integer postId) {
+	public void createCheckStatus (@PathVariable Long postId) {
 		Post post = postsService.getPostById(postId);		
-		CheckStatus status = webService.checkUrl(post);
-		checkStatusService.createCheckStatus(status);
+		CheckStatus status = checkStatusService.checkUrl(post);
+		
 	}
 	
 	@RequestMapping(value = "post/all/createCheckStatus", method = RequestMethod.POST)
 	public void checkStatuses () {
 		List<Post> posts = postsService.getAllPosts();
-		
+		checkStatusService.createCheckUrlBatch(posts );		
 	}
 
 }

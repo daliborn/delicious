@@ -14,11 +14,12 @@ import app.service.PostsService;
 @Service
 @Qualifier("postsService")
 public class PostsServiceImpl implements PostsService {
-	private static final Logger logger = Logger.getLogger(PostsServiceImpl.class.getName());
-	
-	 @Autowired
-	 PostsRepository repository;
-	
+	private static final Logger logger = Logger
+			.getLogger(PostsServiceImpl.class.getName());
+
+	@Autowired
+	PostsRepository repository;
+
 	@Override
 	public void createPosts(List<Post> postsList) {
 		repository.save(postsList);
@@ -27,18 +28,17 @@ public class PostsServiceImpl implements PostsService {
 	@Override
 	public List<Post> getAllPosts() {
 		return (List<Post>) repository.findAll();
-		
+
 	}
 
 	@Override
 	public void updatePost(Post post) {
-		
+
 	}
 
 	@Override
-	public Post getPostById(Integer postId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Post getPostById(Long postId) {
+		return repository.findOne(postId);
 	}
 
 }

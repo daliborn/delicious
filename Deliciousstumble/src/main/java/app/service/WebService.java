@@ -1,12 +1,16 @@
 package app.service;
 
-import java.util.List;
+import java.io.IOException;
 
 import app.domain.CheckStatus;
 import app.domain.Post;
 
+
+/**
+ * @author daliborn
+ * class used for interaction with web
+ */
 public interface WebService {
 	public void openUrlinBrowser(String url);
-	public void checkUrlBatch(List<Post> posts);
-	public CheckStatus checkUrl(Post post);
+	public CheckStatus checkUrl(Post post) throws IOException;	
 }

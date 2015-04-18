@@ -1,8 +1,7 @@
 package app.service.impl;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -14,8 +13,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import app.domain.Post;
+import app.dto.Posts;
 import app.service.DeliciousService;
-import domain.Posts;
 
 @Service
 @Qualifier("deliciousService")
@@ -29,7 +28,18 @@ public class DeliciousServiceIml implements DeliciousService {
 			JAXBContext context = JAXBContext.newInstance(Posts.class);
 			Unmarshaller um = context.createUnmarshaller();
 			Posts posts = (Posts) um.unmarshal(new StringReader(body));
-			return posts.getPost();
+			
+			List<app.domain.Post> domainPosts = new ArrayList<Post>();
+			
+			for (app.dto.Post xmlPost : posts.getPost()){
+				app.domain.Post domainPost = new Post(xmlPost.getDescription(), 
+						xmlPost.getExtended(), xmlPost.getHash(), 
+						xmlPost.getHref(), xmlPost.getPrivatea(), 
+						xmlPost.getShared(), xmlPost.getTag(), 
+						xmlPost.getTime(), xmlPost.getMeta(), xmlPost.getOthers());
+				domainPosts.add(domainPost);
+			}
+			return domainPosts;
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

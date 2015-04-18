@@ -6,7 +6,7 @@ import app.domain.CheckStatus;
 import app.domain.Post;
 
 public interface CheckStatusService {
-	public void createCheckStatus(CheckStatus status);
-	public List<CheckStatus> getStatusesforPost(Post post);
+	public CheckStatus checkUrl(Post post);
+	public void createCheckUrlBatch(List<Post> posts);
 
 }

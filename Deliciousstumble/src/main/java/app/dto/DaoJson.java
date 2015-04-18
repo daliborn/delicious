@@ -1,4 +1,4 @@
-package domain;
+package app.dto;
 
 public class DaoJson {
 	private String status;

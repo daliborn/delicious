@@ -1,4 +1,4 @@
-package domain;
+package app.dto;
 
 import java.io.InputStreamReader;
 import java.io.Reader;

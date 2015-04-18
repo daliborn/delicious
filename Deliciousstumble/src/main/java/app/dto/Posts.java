@@ -1,4 +1,4 @@
-package domain;
+package app.dto;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import app.domain.Post;
+import app.dto.Post;
 
 @XmlRootElement(name = "posts")
 public class Posts {

@@ -11,11 +11,18 @@ import javax.persistence.Id;
 
 @Entity
 public class CheckStatus implements Serializable {
-	public CheckStatus(Integer id, Integer statusCode, Timestamp dateRun) {
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4661126982786046555L;
+
+	public CheckStatus(Post post, Integer statusCode, Timestamp dateRun) {
 		super();
-		this.id = id;
 		this.statusCode = statusCode;
 		this.dateRun = dateRun;
+		this.post = post;
 	}
 	
 	protected CheckStatus(){		
@@ -28,6 +35,8 @@ public class CheckStatus implements Serializable {
 	private Integer statusCode;
 	@Column
 	private Timestamp dateRun;
+	@Column
+	private Post post;
 	
 	public Integer getId() {
 		return id;
@@ -46,6 +55,14 @@ public class CheckStatus implements Serializable {
 	}
 	public void setDateRun(Timestamp dateRun) {
 		this.dateRun = dateRun;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	@Override

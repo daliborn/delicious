@@ -3,7 +3,6 @@ package app.web;
 import java.io.IOException;
 import java.util.List;
 
-import javax.jws.WebService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +24,7 @@ import app.domain.Post;
 import app.dto.DeliciousResponse;
 import app.service.DeliciousService;
 import app.service.PostsService;
+import app.service.WebService;
 
 @RestController
 public class DeliciousController {
@@ -50,7 +50,7 @@ public class DeliciousController {
 	private String client_id;
 	
 	@Autowired
-	private DeliciousService deliciousServis;
+	private DeliciousService deliciousService;
 	
 	@Autowired
 	private PostsService postsService;
@@ -107,7 +107,7 @@ public class DeliciousController {
 					bearerClientRequest, OAuth.HttpMethod.GET,
 					OAuthResourceResponse.class);
 			
-			List<Post> postsList = deliciousServis.createList(resourceResponse.getBody());
+			List<Post> postsList = deliciousService.createList(resourceResponse.getBody());
 			postsService.createPosts(postsList);
 		} catch (OAuthProblemException | OAuthSystemException e) {
 			e.printStackTrace();

@@ -14,20 +14,8 @@ import app.dto.DateAdapter;
 @XmlRootElement(name = "post")
 public class Post implements Serializable{
 	
-	public Post(String description, String extended, String hash,
-			String href, String privatea, String shared, String tag,
-			Timestamp time, String meta, Integer others) {
-		super();
-		this.description = description;
-		this.extended = extended;
-		this.hash = hash;
-		this.href = href;
-		this.privatea = privatea;
-		this.shared = shared;
-		this.tag = tag;
-		this.time = time;
-		this.meta = meta;
-		this.others = others;
+	public Post() {
+
 	}
 	
 	private String description;

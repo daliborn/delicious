@@ -5,9 +5,11 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class CheckStatus implements Serializable {
@@ -18,11 +20,12 @@ public class CheckStatus implements Serializable {
 	 */
 	private static final long serialVersionUID = -4661126982786046555L;
 
-	public CheckStatus(Post post, Integer statusCode, Timestamp dateRun) {
+	public CheckStatus(Post post, Integer statusCode, Timestamp dateRun, String errorCode) {
 		super();
 		this.statusCode = statusCode;
 		this.dateRun = dateRun;
 		this.post = post;
+		this.errorCode = errorCode;
 	}
 	
 	protected CheckStatus(){		
@@ -32,11 +35,15 @@ public class CheckStatus implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	@Column
+	private String errorCode;
+	
+	@Column
 	private Integer statusCode;
 	@Column
 	private Timestamp dateRun;
-	@Column
-	private Post post;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+    public Post post;
 	
 	public Integer getId() {
 		return id;

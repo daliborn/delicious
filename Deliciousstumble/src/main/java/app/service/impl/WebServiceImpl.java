@@ -2,6 +2,9 @@ package app.service.impl;
 
 import java.awt.Desktop;
 import java.io.IOException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -43,20 +46,51 @@ public class WebServiceImpl implements WebService {
 	}
 
 	@Override
-	public CheckStatus checkUrl(Post post) throws IOException {
-
-		String path = post.getHref();
-
-		URL url = new URL(path);
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setRequestMethod("GET");
-		connection.connect();
-
-		int code = connection.getResponseCode();
+	public CheckStatus checkUrl(Post post){
 		Date systemDate = new Date();
 		Timestamp date = new Timestamp(systemDate.getTime());
+		String errorCode = null;
 
-		CheckStatus status = new CheckStatus(post, code, date);
+		String path = post.getHref();
+		CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+
+		URL url = null;
+		try {
+			url = new URL(path);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			errorCode = e.getLocalizedMessage();
+		}
+		HttpURLConnection connection = null;
+		try {
+			connection = (HttpURLConnection) url.openConnection();
+		} catch (IOException e) {
+			e.printStackTrace();
+			errorCode = e.getLocalizedMessage();
+		}
+		try {
+			connection.setRequestMethod("GET");
+		} catch (ProtocolException e) {
+			e.printStackTrace();
+			errorCode = e.getLocalizedMessage();
+		}
+		try {
+			connection.connect();
+		} catch (IOException e) {
+			e.printStackTrace();
+			errorCode = e.getLocalizedMessage();
+		}
+
+		int code = 0;
+		try {
+			code = connection.getResponseCode();
+		} catch (IOException e) {
+			e.printStackTrace();
+			errorCode = e.getLocalizedMessage();
+		}
+
+
+		CheckStatus status = new CheckStatus(post, code, date, errorCode);
 		return status;
 	}
 

@@ -2,6 +2,10 @@ package app.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -12,9 +16,13 @@ import app.dto.DateAdapter;
 
 
 @Entity
-@XmlRootElement(name = "posts")
 public class Post implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4375101784885522125L;
+
 	public Post(String description, String extended, String hash,
 			String href, String privatea, String shared, String tag,
 			Timestamp time, String meta, Integer others) {
@@ -59,6 +67,9 @@ public class Post implements Serializable{
 	private String meta;
 	@Column
 	private Integer others;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="post")
+    private List<CheckStatus> checkStatus;
 
 	public String getDescription() {
 		return description;
@@ -165,6 +176,14 @@ public class Post implements Serializable{
 				.format("Post [id=%s, description=%s, extended=%s, hash=%s, href=%s, privatea=%s, shared=%s, tag=%s, time=%s, meta=%s, others=%s]",
 						id, description, extended, hash, href, privatea,
 						shared, tag, time, meta, others);
+	}
+
+	public List<CheckStatus> getCheckStatus() {
+		return checkStatus;
+	}
+
+	public void setCheckStatus(List<CheckStatus> checkStatus) {
+		this.checkStatus = checkStatus;
 	}
 
 }

@@ -39,6 +39,7 @@ public class DeliciousServiceIml implements DeliciousService {
 						xmlPost.getTime(), xmlPost.getMeta(), xmlPost.getOthers());
 				domainPosts.add(domainPost);
 			}
+			logger.info("finish of writing!");
 			return domainPosts;
 		} catch (JAXBException e) {
 			e.printStackTrace();

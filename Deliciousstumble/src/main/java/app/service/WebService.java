@@ -1,7 +1,5 @@
 package app.service;
 
-import java.io.IOException;
-
 import app.domain.CheckStatus;
 import app.domain.Post;
 
@@ -12,5 +10,5 @@ import app.domain.Post;
  */
 public interface WebService {
 	public void openUrlinBrowser(String url);
-	public CheckStatus checkUrl(Post post) throws IOException;	
+	public CheckStatus checkUrl(Post post);	
 }

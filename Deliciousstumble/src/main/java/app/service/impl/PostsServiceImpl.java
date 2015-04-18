@@ -1,5 +1,6 @@
 package app.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -27,7 +28,9 @@ public class PostsServiceImpl implements PostsService {
 
 	@Override
 	public List<Post> getAllPosts() {
-		return (List<Post>) repository.findAll();
+		List<Post> posts =  (List<Post>) repository.findAll();
+		posts.removeAll(Collections.singleton(null));
+		return posts;
 
 	}
 

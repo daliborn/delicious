@@ -2,7 +2,7 @@ package app.service;
 
 import java.util.List;
 
-import domain.Post;
+import app.domain.Post;
 
 public interface DeliciousService {
 

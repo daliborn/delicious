@@ -1,31 +1,28 @@
-package app.service;
+package app.service.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import app.database.DatabaseManager;
-import domain.CheckStatus;
-import domain.Post;
+import app.database.CheckStatusRepository;
+import app.domain.CheckStatus;
+import app.domain.Post;
+import app.service.CheckStatusService;
 
 @Service
 @Qualifier("checkStatusService")
 public class CheckStatusServiceImpl implements CheckStatusService {
 	private static final Logger logger = Logger.getLogger(CheckStatusServiceImpl.class.getName());
 	
+	 @Autowired
+	 CheckStatusRepository repository;
+	
 	@Override
-	public void createCheckStatus(Post post, CheckStatus status) {
-		String sql = "insert into check_status (status_code,date_run,Post_id) values (?, ?, ?)";
-		
-		try {
-			DatabaseManager.executeUpdate(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+	public void createCheckStatus(CheckStatus status) {
+		repository.save(status);
 	}
 
 	@Override

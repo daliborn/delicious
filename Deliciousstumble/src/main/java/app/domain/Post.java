@@ -1,34 +1,63 @@
-package domain;
+package app.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@XmlRootElement(name = "post")
-public class Post {
+import domain.DateAdapter;
+
+
+@Entity
+public class Post implements Serializable{
 	
+	public Post(Integer id, String description, String extended, String hash,
+			String href, String privatea, String shared, String tag,
+			Timestamp time, String meta, Integer others) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.extended = extended;
+		this.hash = hash;
+		this.href = href;
+		this.privatea = privatea;
+		this.shared = shared;
+		this.tag = tag;
+		this.time = time;
+		this.meta = meta;
+		this.others = others;
+	}
+	
+	protected Post(){
+		
+	}
+
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-
+	
+	@Column
 	private String description;
-
+	@Column ( length = 10000 )
 	private String extended;
-
+	@Column
 	private String hash;
-
+	@Column( length = 10000 )
 	private String href;
-
+	@Column
 	private String privatea;
-
+	@Column
 	private String shared;
-
+	@Column
 	private String tag;
-
+	@Column
 	private Timestamp time;
-	
+	@Column
 	private String meta;
-	
+	@Column
 	private Integer others;
 
 	public String getDescription() {
@@ -128,6 +157,14 @@ public class Post {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return String
+				.format("Post [id=%s, description=%s, extended=%s, hash=%s, href=%s, privatea=%s, shared=%s, tag=%s, time=%s, meta=%s, others=%s]",
+						id, description, extended, hash, href, privatea,
+						shared, tag, time, meta, others);
 	}
 
 }

@@ -2,11 +2,11 @@ package app.service;
 
 import java.util.List;
 
-import domain.CheckStatus;
-import domain.Post;
+import app.domain.CheckStatus;
+import app.domain.Post;
 
 public interface CheckStatusService {
-	public void createCheckStatus(Post post, CheckStatus status);
+	public void createCheckStatus(CheckStatus status);
 	public List<CheckStatus> getStatusesforPost(Post post);
 
 }

@@ -1,4 +1,4 @@
-package app.service;
+package app.service.impl;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,7 +13,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import domain.Post;
+import app.domain.Post;
+import app.service.DeliciousService;
 import domain.Posts;
 
 @Service

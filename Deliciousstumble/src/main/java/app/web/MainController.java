@@ -22,12 +22,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import app.domain.Post;
 import app.service.PostsService;
 import app.service.DeliciousService;
-import app.service.UrlChecker;
 import app.service.WebService;
+import app.service.util.UrlChecker;
 import domain.DeliciousResponse;
-import domain.Post;
 
 @RestController
 public class MainController {

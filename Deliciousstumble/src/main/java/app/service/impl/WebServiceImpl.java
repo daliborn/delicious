@@ -1,4 +1,4 @@
-package app.service;
+package app.service.impl;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -10,8 +10,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import domain.CheckStatus;
-import domain.Post;
+import app.domain.CheckStatus;
+import app.domain.Post;
+import app.service.WebService;
+import app.service.util.UrlChecker;
 
 @Service
 @Qualifier("webService")

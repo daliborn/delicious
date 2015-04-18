@@ -2,8 +2,8 @@ package app.service;
 
 import java.util.List;
 
-import domain.CheckStatus;
-import domain.Post;
+import app.domain.CheckStatus;
+import app.domain.Post;
 
 public interface WebService {
 	public void openUrlinBrowser(String url);

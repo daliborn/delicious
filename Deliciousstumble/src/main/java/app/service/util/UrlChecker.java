@@ -1,4 +1,4 @@
-package app.service;
+package app.service.util;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -6,7 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import domain.Post;
+import app.domain.Post;
 
 public class UrlChecker implements Runnable {
 	private ArrayBlockingQueue<Post> post;
